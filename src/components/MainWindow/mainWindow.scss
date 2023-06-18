@@ -1,0 +1,52 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+@import "../../styles/buttons.scss";
+
+.mainWindow {
+  width: 100%;
+  border: 1px solid grey;
+
+  padding: 15px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    user-select: none;
+  }
+
+  &__taskWraper {
+    width: 450px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+    grid-template: 50px / repeat(20, 1fr);
+
+    span {
+      grid-column: 17 / 21;
+      height: 100%;
+      font: var(--taskName-font);
+      font-weight: var(--tasksName-font-weight);
+      @include alignment;
+      user-select: none;
+    }
+
+    &.red {
+      span {
+        color: var(--pouring-red);
+      }
+    }
+
+    &.orange {
+      span {
+        color: var(--pouring-orange);
+      }
+    }
+
+    &.green {
+      span {
+        color: var(--pouring-green);
+      }
+    }
+  }
+}

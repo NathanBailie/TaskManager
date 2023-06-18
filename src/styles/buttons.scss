@@ -1,0 +1,84 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.button {
+  grid-column: 1 / 17;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  a {
+    height: 100%;
+    font: var(--taskName-font);
+    font-weight: var(--tasksName-font-weight);
+    @include alignment;
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 2px 30px 2px 30px;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      transition: all 0.3s ease;
+
+      &::before {
+        left: 0%;
+        @include alignment;
+      }
+    }
+  }
+
+  &.red {
+    a {
+      color: var(--pouring-red);
+
+      &:hover {
+        color: white;
+
+        &::before {
+          background: var(--pouring-red);
+          content: 'High Priority Tasks';
+        }
+      }
+    }
+  }
+
+  &.orange {
+    a {
+      color: var(--pouring-orange);
+
+      &:hover {
+        color: white;
+
+        &::before {
+          background: var(--pouring-orange);
+          content: 'Middle Priority Tasks';
+        }
+      }
+    }
+  }
+
+  &.green {
+    a {
+      color: var(--pouring-green);
+
+      &:hover {
+        color: white;
+
+        &::before {
+          background: var(--pouring-green);
+          content: 'Low Priority Tasks';
+        }
+      }
+    }
+  }
+}

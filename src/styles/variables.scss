@@ -1,0 +1,15 @@
+:root {
+  --tasksName-font-family: Cursive;
+  --tasksName-font-size: 22px;
+  --tasksName-line-height: 30px;
+  --tasksName-font-weight: bold;
+
+  // font
+  --taskName-font: var(--tasksName-font-size) / var(--tasksName-line-height) var(--tasksName-font-family);
+
+
+  // pourings
+  --pouring-red: #df0d0d;
+  --pouring-orange: darkorange;
+  --pouring-green: green;
+}
