@@ -17,21 +17,21 @@ const router = new VueRouter({
       path: '/high',
       component: TaskListWindow,
       props: {
-        propString: 'high'
+        priority: 'high'
       },
     },
     {
       path: '/middle',
       component: TaskListWindow,
       props: {
-        propString: 'middle'
+        priority: 'middle'
       },
     },
     {
       path: '/low',
       component: TaskListWindow,
       props: {
-        propString: 'low'
+        priority: 'low'
       },
     },
     {
