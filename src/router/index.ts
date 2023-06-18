@@ -1,9 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HighPriority from '../components/HighPriority/HighPriority.vue';
-import MiddlePriority from '../components/MiddlePriority/MiddlePriority.vue';
-import LowPriority from '../components/LowPriority/LowPriority.vue';
 import MainWindow from '../components/MainWindow/MainWindow.vue';
+import TaskListWindow from '../components/TaskListWIndow/TaskListindow.vue'
 import NotFound from '../components/NotFound/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -13,23 +11,28 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: MainWindow
     },
     {
       path: '/high',
-      name: 'highPriority',
-      component: HighPriority
+      component: TaskListWindow,
+      props: {
+        propString: 'high'
+      },
     },
     {
       path: '/middle',
-      name: 'middlePriority',
-      component: MiddlePriority
+      component: TaskListWindow,
+      props: {
+        propString: 'middle'
+      },
     },
     {
       path: '/low',
-      name: 'lowPriority',
-      component: LowPriority
+      component: TaskListWindow,
+      props: {
+        propString: 'low'
+      },
     },
     {
       path: '*',
