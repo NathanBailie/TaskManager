@@ -2,14 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import uuid from 'uuid';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state() {
     return {
-      tasksType: '',
       highPriorityTasks: [
-        { name: 'progr', descr: "new two lessons of the Ulbi's course", id: uuid() }
+        { name: 'progr', descr: "new two lessons of the Ulbi's course", id: uuid() },
       ],
       middlePriorityTasks: [
         { name: 'english', descr: "new lesson from the Logus course", id: uuid() },
@@ -26,19 +25,14 @@ const store = new Vuex.Store({
 
       switch (priority) {
         case "high":
-          state.highPriorityTasks = tasks.length !== 0 && tasks;
-          state.tasksType = "High Priority Tasks";
+          state.highPriorityTasks = tasks.length !== 0 ? tasks : state.highPriorityTasks;
           break;
         case "middle":
-          state.middlePriorityTasks = tasks.length !== 0 && tasks;
-          state.tasksType = "Middle Priority Tasks";
-
+          state.middlePriorityTasks = tasks.length !== 0 ? tasks : state.middlePriorityTasks;
           break;
         case "low":
-          state.lowPriorityTasks = tasks.length !== 0 && tasks;
-          state.tasksType = "Low Priority Tasks";
+          state.lowPriorityTasks = tasks.length !== 0 ? tasks : state.lowPriorityTasks;
           break;
-
         default:
           break;
       };
