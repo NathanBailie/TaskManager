@@ -5,8 +5,8 @@ export function createTask(name, descr) {
     name: name,
     descr: descr,
     id: uuid(),
-    nameIsEdit: false,
-    descrIsEdit: false,
+    nameOnEdit: false,
+    descrOnEdit: false,
     styles: {
       done: false,
     }

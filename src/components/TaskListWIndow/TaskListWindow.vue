@@ -10,12 +10,31 @@ export default {
   data() {
     return {
       nameOfTheTasks: "",
+      inputName: "",
+      inputDescr: "",
     };
   },
-  methods: {},
+  methods: {
+    handler(priority, whatOnEdit, id) {
+      this.$store.commit("changeNameEditProperty", [priority, whatOnEdit, id]);
+      this.inputName = store.state.nameInFocus;
+      this.inputDescr = store.state.descrInFocus;
+    },
+
+    pencilHandler(...args) {
+      const [priority, id] = args;
+      this.$store.commit("findChosenTask", [priority, id]);
+      this.inputName = store.state.nameInFocus;
+      this.inputDescr = store.state.descrInFocus;
+      this.$store.commit("editing", args);
+    },
+  },
   mounted() {
-    this.nameOfTheTasks = `${this.priority.slice(0, 1).toUpperCase()}
-      ${this.priority.slice(1)} 
+    // ! remove then
+    // localStorage.clear();
+    this.nameOfTheTasks = `${this.priority
+      .slice(0, 1)
+      .toUpperCase()}${this.priority.slice(1)}
       Priority Tasks`;
 
     try {
@@ -43,13 +62,86 @@ export default {
 
     <div
       class="gridContainer list"
-      v-for="task in $store.state[`${priority}PriorityTasks`]"
+      v-for="task in $store.state[`${this.priority}PriorityTasks`]"
       :key="task.id"
     >
-      <p :class="task.styles">{{ task.name }}</p>
-      <p :class="task.styles">{{ task.descr }}</p>
+      <p
+        :class="task.styles"
+        class="taskName"
+        v-if="!task.nameOnEdit"
+        @click="handler(priority, 'nameOnEdit', task.id)"
+      >
+        {{ task.name }}
+      </p>
+      <textarea
+        class="nameInput"
+        v-else
+        v-model="inputName"
+        @keyup.enter="
+          $store.commit('finishEditing', [
+            priority,
+            task.id,
+            inputName,
+            inputDescr,
+            'nameOnEdit',
+          ])
+        "
+        v-on:blur="
+          $store.commit('finishEditing', [
+            priority,
+            task.id,
+            inputName,
+            inputDescr,
+            'nameOnEdit',
+          ])
+        "
+      ></textarea>
+      <p
+        :class="task.styles"
+        class="taskDescr"
+        v-if="!task.descrOnEdit"
+        @click="handler(priority, 'descrOnEdit', task.id)"
+      >
+        {{ task.descr }}
+      </p>
+      <textarea
+        class="descrisEdit"
+        v-else
+        v-model="inputDescr"
+        @keyup.enter="
+          $store.commit('finishEditing', [
+            priority,
+            task.id,
+            inputName,
+            inputDescr,
+            'descrOnEdit',
+          ])
+        "
+        v-on:blur="
+          $store.commit('finishEditing', [
+            priority,
+            task.id,
+            inputName,
+            inputDescr,
+            'descrOnEdit',
+          ])
+        "
+      ></textarea>
+
       <div class="actions">
-        <button class="edit">
+        <button
+          class="edit"
+          @click="
+            pencilHandler(
+              priority,
+              task.id,
+              inputName,
+              inputDescr,
+              'nameOnEdit',
+              'descrOnEdit'
+            )
+          "
+        >
           <img
             src="../../resources/icons/pencil.png"
             alt="pencil"

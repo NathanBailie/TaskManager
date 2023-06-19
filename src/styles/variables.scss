@@ -1,10 +1,9 @@
 :root {
+  // task links on the main page
   --tasksName-font-family: Cursive;
   --tasksName-font-size: 22px;
   --tasksName-line-height: 30px;
   --tasksName-font-weight: bold;
-
-  // font
   --taskName-font: var(--tasksName-font-size) / var(--tasksName-line-height) var(--tasksName-font-family);
 
 
@@ -12,4 +11,24 @@
   --pouring-red: #df0d0d;
   --pouring-orange: darkorange;
   --pouring-green: green;
+
+  // table header
+  --tableheader-font-family: Times;
+  --tableheader-font-size: 20px;
+  --tableheader-font-weight: bold;
+  --tableheader-font: var(--tableheader-font-weight) var(--tableheader-font-size) var(--tableheader-font-family);
+
+
+  // table task texts
+  --tasktext-font-family: Tahoma;
+  --tasktext-font-size: 16px;
+  --tasktext-line-height: 24px;
+  --tasktext-font: var(--tasktext-font-size) / var(--tasktext-line-height) var(--tasktext-font-family);
+
+
+  // textareas
+  --textaria-font-family: Verdana;
+  --textaria-font-size: 16px;
+  --textaria-line-height: 24px;
+  --textaria-font: var(--textaria-font-size) / var(--textaria-line-height) var(--textaria-font-family);
 }
