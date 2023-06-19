@@ -4,8 +4,9 @@
 
 .mainWindow {
   width: 100%;
-  border: 1px solid grey;
-
+  border: 1px solid #f19f24;
+  border-radius: 10px;
+  background: #fffded;
   padding: 15px;
 
   h1 {
