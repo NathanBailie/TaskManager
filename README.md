@@ -6,7 +6,7 @@ It is a ask manager, where you can enter your tasks by priority level. You can e
 ### [Link](https://taskmanager.frontwebdev.ru/ "Click to visit the project website")
 
 ## Demo
-<img src="https://github.com/NathanBailie/TaskManager/raw/main/TaskManager.gif" width="900" />
+<img src="https://github.com/NathanBailie/TaskManager/raw/main/TaskManager.gif" width="450" />
 
 ## Tech
 * Html
