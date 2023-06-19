@@ -9,7 +9,6 @@
   }
 }
 
-
 .gridContainer {
   display: grid;
   width: 800px;
@@ -30,7 +29,7 @@
     padding: 10px;
 
     &:hover {
-      text-decoration: underline 2px;
+      text-decoration: underline 2px darkorange;
       cursor: pointer;
     }
 
@@ -52,6 +51,8 @@
   }
 
   &.headline {
+    border-radius: 15px 15px 0 0;
+
     p {
       font-size: 18px;
       font-weight: bold;

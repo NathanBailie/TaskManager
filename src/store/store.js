@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import uuid from 'uuid';
+import { createTask } from '../utils/utils';
 
 Vue.use(Vuex);
 
@@ -8,18 +8,19 @@ const store = new Vuex.Store({
   state() {
     return {
       highPriorityTasks: [
-        { name: 'progr', descr: "new two lessons of the Ulbi's course", id: uuid() },
+        createTask('progr', 'new two lessons of the Ulbi course'),
       ],
       middlePriorityTasks: [
-        { name: 'english', descr: "new lesson from the Logus course", id: uuid() },
-        { name: 'turkish', descr: "new grammar lesson and 5 new texts", id: uuid() }
+        createTask('english', 'new lesson from the Logus course'),
+        createTask('turkish', 'new grammar lesson and 5 new texts'),
       ],
       lowPriorityTasks: [
-        { name: 'Bhargava, algorithms', descr: " new 10-15 pages", id: uuid() }
+        createTask('Bhargava, algorithms', 'new 10-15 pages'),
       ],
     }
   },
   mutations: {
+
     uploadTasksToStore(state, payload) {
       const [priority, tasks] = payload;
 
@@ -37,7 +38,6 @@ const store = new Vuex.Store({
           break;
       };
     },
-
   }
 })
 
