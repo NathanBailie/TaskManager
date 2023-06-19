@@ -77,7 +77,7 @@ export default {
         class="nameInput"
         v-else
         v-model="inputName"
-        @keyup.enter="
+        @keydown.enter.prevent="
           $store.commit('finishEditing', [
             priority,
             task.id,
@@ -108,7 +108,7 @@ export default {
         class="descrisEdit"
         v-else
         v-model="inputDescr"
-        @keyup.enter="
+        @keydown.enter.prevent="
           $store.commit('finishEditing', [
             priority,
             task.id,
@@ -131,16 +131,7 @@ export default {
       <div class="actions">
         <button
           class="edit"
-          @click="
-            pencilHandler(
-              priority,
-              task.id,
-              inputName,
-              inputDescr,
-              'nameOnEdit',
-              'descrOnEdit'
-            )
-          "
+          @click="pencilHandler(priority, task.id, inputName, inputDescr)"
         >
           <img
             src="../../resources/icons/pencil.png"

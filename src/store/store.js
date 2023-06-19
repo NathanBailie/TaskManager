@@ -68,12 +68,13 @@ const store = new Vuex.Store({
       state[`${priority}PriorityTasks`] = state[`${priority}PriorityTasks`].map((task) => {
         if (task.id === id) {
           if (property === 'nameOnEdit') {
+            task.nameOnEdit = false;
             task.name = inputName;
           };
           if (property === 'descrOnEdit') {
+            task.descrOnEdit = false;
             task.descr = inputDescr;
           };
-          task[property] = !task[property];
           return task;
         };
         return task;
@@ -98,9 +99,8 @@ const store = new Vuex.Store({
         priority,
         id,
         inputName,
-        inputDescr,
-        nameOnEdit,
-        descrOnEdit] = payload;
+        inputDescr
+      ] = payload;
 
       state[`${priority}PriorityTasks`] = state[`${priority}PriorityTasks`].map((task) => {
         if (task.id === id) {
