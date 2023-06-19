@@ -10,38 +10,20 @@ export default {
   data() {
     return {
       nameOfTheTasks: "",
-      codeWorld: "",
-      tasks: [],
     };
   },
   methods: {},
   mounted() {
-    switch (this.priority) {
-      case "high":
-        this.nameOfTheTasks = "High Priority Tasks";
-        this.codeWorld = "HIGH";
-        this.tasks = store.state.highPriorityTasks;
-        break;
-      case "middle":
-        this.nameOfTheTasks = "Middle Priority Tasks";
-        this.codeWorld = "MIDDLE";
-        this.tasks = store.state.middlePriorityTasks;
-        break;
-      case "low":
-        this.nameOfTheTasks = "Low Priority Tasks";
-        this.codeWorld = "LOW";
-        this.tasks = store.state.lowPriorityTasks;
-        break;
-
-      default:
-        break;
-    }
+    this.nameOfTheTasks = `${this.priority.slice(0, 1).toUpperCase()}
+      ${this.priority.slice(1)} 
+      Priority Tasks`;
 
     try {
-      const dataByTheKey = localStorage.getItem(
-        `${this.codeWorld0}_PRIORITY_TASKS`
+      const dataFromStorage = localStorage.getItem(
+        `${this.priority.toUpperCase()}_PRIORITY_TASKS`
       );
-      store.commit("uploadTasksToStore", [this.priority, dataByTheKey]);
+      const result = JSON.parse(dataFromStorage);
+      store.commit("uploadTasksToStore", [this.priority, result]);
     } catch (err) {
       store.commit("uploadTasksToStore", [this.priority, []]);
     }
@@ -59,9 +41,13 @@ export default {
       <p>Actions</p>
     </div>
 
-    <div class="gridContainer list" v-for="task in this.tasks" :key="task.id">
-      <p>{{ task.name }}</p>
-      <p>{{ task.descr }}</p>
+    <div
+      class="gridContainer list"
+      v-for="task in $store.state[`${priority}PriorityTasks`]"
+      :key="task.id"
+    >
+      <p :class="task.styles">{{ task.name }}</p>
+      <p :class="task.styles">{{ task.descr }}</p>
       <div class="actions">
         <button class="edit">
           <img
@@ -70,7 +56,10 @@ export default {
             title="Edit this note"
           />
         </button>
-        <button class="done">
+        <button
+          class="complete"
+          @click="$store.commit('changeDoneSetting', [priority, task.id])"
+        >
           <img
             src="../../resources/icons/done.png"
             alt="done"

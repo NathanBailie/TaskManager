@@ -7,5 +7,8 @@ export function createTask(name, descr) {
     id: uuid(),
     nameIsEdit: false,
     descrIsEdit: false,
+    styles: {
+      done: false,
+    }
   };
 };

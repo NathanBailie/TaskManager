@@ -20,24 +20,31 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-
     uploadTasksToStore(state, payload) {
       const [priority, tasks] = payload;
+      const targetTasks = state[`${priority}PriorityTasks`];
 
-      switch (priority) {
-        case "high":
-          state.highPriorityTasks = tasks.length !== 0 ? tasks : state.highPriorityTasks;
-          break;
-        case "middle":
-          state.middlePriorityTasks = tasks.length !== 0 ? tasks : state.middlePriorityTasks;
-          break;
-        case "low":
-          state.lowPriorityTasks = tasks.length !== 0 ? tasks : state.lowPriorityTasks;
-          break;
-        default:
-          break;
+      if (tasks.length === 0) {
+        return;
+      } else {
+        state[`${priority}PriorityTasks`] = tasks
+        console.log(state[`${priority}PriorityTasks`]);
       };
     },
+
+    changeDoneSetting(state, payload) {
+      const [priority, id] = payload;
+
+      state[`${priority}PriorityTasks`] = state[`${priority}PriorityTasks`].map((task) => {
+        if (task.id === id) {
+          task.styles.done = !task.styles.done;
+          return task;
+        };
+        return task;
+      })
+
+      localStorage.setItem(`${priority.toUpperCase()}_PRIORITY_TASKS`, JSON.stringify(state[`${priority}PriorityTasks`]));
+    }
   }
 })
 

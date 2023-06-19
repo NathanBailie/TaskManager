@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MainWindow from '../components/MainWindow/MainWindow.vue';
-import TaskListWindow from "../components/TaskListWIndow/TaskListWIndow.vue";
+import TaskListWindow from "../components/TaskListWindow/TaskListWindow.vue";
 import NotFound from '../components/NotFound/NotFound.vue';
 
 Vue.use(VueRouter);
