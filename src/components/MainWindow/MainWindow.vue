@@ -6,10 +6,19 @@ export default {
   name: "MainWindow",
   data() {
     return {
-      highTasksArrayLength: store.state.highPriorityTasks.length,
-      middleTasksArrayLength: store.state.middlePriorityTasks.length,
-      lowTasksArrayLength: store.state.lowPriorityTasks.length,
+      highTasksArrayLength: "",
+      middleTasksArrayLength: "",
+      lowTasksArrayLength: "",
     };
+  },
+  mounted() {
+    this.$store.commit("uploadTasksToStore");
+    const priorities = ["high", "middle", "low"];
+
+    for (let i = 0; i < priorities.length; i++) {
+      this[`${priorities[i]}TasksArrayLength`] =
+        store.state[`${priorities[i]}PriorityTasks`].length;
+    }
   },
 };
 </script>

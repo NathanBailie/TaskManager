@@ -1,11 +1,15 @@
 <script>
 import "./taskListWindow.scss";
 import store from "../../store/store";
+import AddForm from "../AddForm/AddForm.vue";
 
 export default {
   name: "HighPriority",
   props: {
     priority: String,
+  },
+  components: {
+    AddForm,
   },
   data() {
     return {
@@ -30,22 +34,12 @@ export default {
     },
   },
   mounted() {
-    // ! remove then
-    // localStorage.clear();
     this.nameOfTheTasks = `${this.priority
       .slice(0, 1)
       .toUpperCase()}${this.priority.slice(1)}
       Priority Tasks`;
 
-    try {
-      const dataFromStorage = localStorage.getItem(
-        `${this.priority.toUpperCase()}_PRIORITY_TASKS`
-      );
-      const result = JSON.parse(dataFromStorage);
-      store.commit("uploadTasksToStore", [this.priority, result]);
-    } catch (err) {
-      store.commit("uploadTasksToStore", [this.priority, []]);
-    }
+    this.$store.commit("uploadTasksToStore");
   },
 };
 </script>
@@ -74,9 +68,10 @@ export default {
         {{ task.name }}
       </p>
       <textarea
-        class="nameInput"
+        class="nameInput textarea"
         v-else
         v-model="inputName"
+        placeholder="type the name of the task"
         @keydown.enter.prevent="
           $store.commit('finishEditing', [
             priority,
@@ -105,9 +100,10 @@ export default {
         {{ task.descr }}
       </p>
       <textarea
-        class="descrisEdit"
+        class="descrisEdit textarea"
         v-else
         v-model="inputDescr"
+        placeholder="type the description"
         @keydown.enter.prevent="
           $store.commit('finishEditing', [
             priority,
@@ -130,7 +126,7 @@ export default {
 
       <div class="actions">
         <button
-          class="edit"
+          class="edit actionButton"
           @click="pencilHandler(priority, task.id, inputName, inputDescr)"
         >
           <img
@@ -140,7 +136,7 @@ export default {
           />
         </button>
         <button
-          class="complete"
+          class="complete actionButton"
           @click="$store.commit('changeDoneSetting', [priority, task.id])"
         >
           <img
@@ -149,7 +145,10 @@ export default {
             title="Marked as done"
           />
         </button>
-        <button class="delete">
+        <button
+          class="delete actionButton"
+          @click="$store.commit('deleteTask', [priority, task.id])"
+        >
           <img
             src="../../resources/icons/delete.png"
             alt="delete"
@@ -158,6 +157,7 @@ export default {
         </button>
       </div>
     </div>
+    <AddForm :priority="this.priority" />
     <button class="back" title="Return to the main window with table">
       Back
       <a href="/"></a>

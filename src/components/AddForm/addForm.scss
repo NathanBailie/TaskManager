@@ -1,0 +1,108 @@
+@import "../../styles/textarea.scss";
+@import "../../styles/mixins.scss";
+
+.addForm {
+  display: flex;
+  gap: 10px;
+  margin-top: 45px;
+
+  textarea {
+    min-height: 50px;
+    height: 50px;
+  }
+
+  &__taskName {
+    width: 240px;
+  }
+
+  &__taskDescr {
+    width: 360px;
+  }
+}
+
+.adder {
+  flex-grow: 1;
+  height: 50px;
+  border-radius: 5px;
+  background: linear-gradient(rgb(237, 237, 237), #f7ebd0);
+  border: 1px solid orange;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-radius: 15px;
+    background: linear-gradient(rgb(255 252 252), #f7e2b2);
+    transform: scale(1.03);
+    bottom: 0;
+    box-shadow: 1px 1px 1px 1px grey;
+  }
+
+  &:active {
+    background: linear-gradient(rgb(229 226 226), #ffe2a0);
+    transform: scale(1);
+    box-shadow: 0px 0px 1px 1px lightgrey;
+  }
+}
+
+.slideWraper {
+  width: 100%;
+  height: 100px;
+  transition: all 0.3s ease;
+  border-radius: 15px;
+
+  &:hover {
+    transform: translateY(-50%);
+  }
+}
+
+.text {
+  height: 50px;
+  width: 100%;
+  font-size: 22px;
+  @include alignment;
+}
+
+.plus {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  @include alignment;
+
+  &:active {
+    div {
+      border: 3px solid #eb9225;
+    }
+
+    span {
+      background: darkorange;
+
+    }
+  }
+
+  div {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid darkorange;
+    @include alignment;
+    position: relative;
+
+    span {
+      background: orange;
+
+      &:first-child {
+        width: 25px;
+        height: 5px;
+        position: absolute;
+      }
+
+      &:last-child {
+        width: 5px;
+        height: 25px;
+        position: absolute;
+      }
+    }
+  }
+}

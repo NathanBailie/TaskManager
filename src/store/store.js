@@ -22,13 +22,23 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    uploadTasksToStore(state, payload) {
-      const [priority, tasks] = payload;
+    uploadTasksToStore(state) {
+      const priorities = ['high', 'middle', 'low'];
 
-      if (tasks.length === 0) {
-        return;
-      } else {
-        state[`${priority}PriorityTasks`] = tasks
+      for (let i = 0; i < priorities.length; i++) {
+        try {
+          const dataFromStorage = localStorage.getItem(
+            `${priorities[i].toUpperCase()}_PRIORITY_TASKS`
+          );
+          if (dataFromStorage === null) {
+            return;
+          };
+
+          const result = JSON.parse(dataFromStorage);
+          state[`${priorities[i]}PriorityTasks`] = result;
+        } catch (err) {
+          return;
+        };
       };
     },
 
@@ -123,7 +133,20 @@ const store = new Vuex.Store({
         };
         return task;
       });
+    },
+    deleteTask(state, payload) {
+      const [priority, id] = payload;
 
+      state[`${priority}PriorityTasks`] = state[`${priority}PriorityTasks`].filter((task) => task.id !== id);
+
+      localStorage.setItem(`${priority.toUpperCase()}_PRIORITY_TASKS`, JSON.stringify(state[`${priority}PriorityTasks`]));
+    },
+    addNewTask(state, payload) {
+      const [priority, name, description] = payload;
+      const newTask = createTask(name, description);
+
+      state[`${priority}PriorityTasks`] = [...state[`${priority}PriorityTasks`], newTask];
+      localStorage.setItem(`${priority.toUpperCase()}_PRIORITY_TASKS`, JSON.stringify(state[`${priority}PriorityTasks`]));
     }
   }
 })

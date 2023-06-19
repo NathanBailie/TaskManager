@@ -1,0 +1,17 @@
+@import "./variables.scss";
+
+.textarea {
+  resize: vertical;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  background: #f5f5f5;
+  font: var(--textaria-font);
+
+
+  &:focus {
+    outline: 1px darkorange solid;
+    box-shadow: 0px 0px 5px 1px orange;
+    background: white;
+  }
+}

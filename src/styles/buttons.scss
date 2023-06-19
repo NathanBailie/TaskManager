@@ -83,16 +83,16 @@
 }
 
 .back {
-  font-size: 22px;
   width: 130px;
-  border: 1px solid orange;
+  font-size: 22px;
+  margin: 45px auto 0;
   padding: 10px 25px;
+  background: linear-gradient(220deg, rgb(237 237 237), #fff5de);
+  border: 1px solid orange;
   border-radius: 25px;
-  margin: 25px 0 0 30px;
   @include alignment;
   cursor: pointer;
   user-select: none;
-  background: linear-gradient(220deg, rgb(237 237 237), #fff5de);
   transition: all 0.3s ease;
   position: relative;
 
@@ -138,5 +138,45 @@
     height: 100%;
     position: absolute;
     border-radius: 25px;
+  }
+}
+
+.actionButton {
+  width: 45px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50%;
+  transition: all 0.1s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #f3f3f3;
+  }
+
+  &.edit {
+    grid-column: 1 / 4;
+    margin: 0 auto;
+  }
+
+  &.complete {
+    grid-column: 4 / 7;
+    margin: 0 auto;
+  }
+
+  &.delete {
+    grid-column: 7 / 11;
+    margin: 0 auto;
   }
 }
