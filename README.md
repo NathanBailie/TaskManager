@@ -10,6 +10,6 @@ It is a ask manager, where you can enter your tasks by priority level. You can e
 
 ## Tech
 * Html
-* CSS (scss, flex, grid, variables, mixins,    pseudo-elements, pseudo-classes etc...)
-* JavaScript
+* CSS (scss, flex, grid, variables, mixins,    pseudo-elements, pseudo-classes, etc...)
+* JavaScript (local storage)
 * Vue2 (vue-router, vuex)
